@@ -1,14 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Dashboard from "./pages/dashboard";
+import { loadStripe } from "@stripe/stripe-js";
+import { CartProvider } from "use-shopping-cart";
+const stripePromise = loadStripe(process.env.REACT_APP_STIPE_KEY || "");
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Router>
+    <div>
+      <Switch>
+        <CartProvider
+          stripe={stripePromise}
+          successUrl="stripe.com"
+          cancelUrl="google.com"
+          currency="hkd"
+          allowedCountries={["HK"]}
+          billingAddressCollection={true}
+          mode="client-only"
+        >
+          <Route path="/dashboard" component={Dashboard} />
+        </CartProvider>
+      </Switch>
+    </div>
+  </Router>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

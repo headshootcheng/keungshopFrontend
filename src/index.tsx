@@ -6,7 +6,7 @@ import Dashboard from "./pages/dashboard";
 import { loadStripe } from "@stripe/stripe-js";
 import { CartProvider } from "use-shopping-cart";
 const stripePromise = loadStripe(process.env.REACT_APP_STIPE_KEY || "");
-
+console.log(process.env);
 ReactDOM.render(
   <Router>
     <div>

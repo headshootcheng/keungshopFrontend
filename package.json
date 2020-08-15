@@ -26,7 +26,7 @@
     "use-shopping-cart": "^2.1.0"
   },
   "scripts": {
-    "build:style": "tailwindcss build src/styles/tailwind.css -o src/styles/tailwind.css",
+    "build:style": "tailwindcss build src/styles/style.css -o src/styles/tailwind.css",
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
     "test": "react-scripts test",

@@ -10,8 +10,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -19,6 +17,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import LockIcon from "@material-ui/icons/Lock";
+import AccountPopUp from "./accountPopUp";
+import AccountPopUpMobile from "./accountPopUpMobile";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
@@ -131,56 +131,8 @@ const Topbar: React.FC<{ username: string; onPressMenu: () => void }> = ({
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Reset Password</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <LockIcon />
-        </IconButton>
-        <p>Reset Password</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <div className={classes.wrapper}>
@@ -238,6 +190,7 @@ const Topbar: React.FC<{ username: string; onPressMenu: () => void }> = ({
               aria-controls={menuId}
               onClick={handleProfileMenuOpen}
               color="inherit"
+              style={{ outline: "none" }}
             >
               <AccountCircle />
             </IconButton>
@@ -247,14 +200,25 @@ const Topbar: React.FC<{ username: string; onPressMenu: () => void }> = ({
               aria-controls={mobileMenuId}
               onClick={handleMobileMenuOpen}
               color="inherit"
+              style={{ outline: "none" }}
             >
               <MoreIcon />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      <AccountPopUp
+        anchorEl={anchorEl}
+        menuId={menuId}
+        isMenuOpen={isMenuOpen}
+        handleMenuClose={handleMenuClose}
+      />
+      <AccountPopUpMobile
+        mobileMoreAnchorEl={mobileMoreAnchorEl}
+        mobileMenuId={mobileMenuId}
+        isMobileMenuOpen={isMobileMenuOpen}
+        handleMobileMenuClose={handleMobileMenuClose}
+      />
     </div>
   );
 };

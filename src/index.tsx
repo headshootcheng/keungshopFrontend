@@ -13,8 +13,8 @@ ReactDOM.render(
       <Switch>
         <CartProvider
           stripe={stripePromise}
-          successUrl="stripe.com"
-          cancelUrl="google.com"
+          successUrl="http://www.stripe.com"
+          cancelUrl="https://www.google.com"
           currency="hkd"
           allowedCountries={["HK"]}
           billingAddressCollection={true}

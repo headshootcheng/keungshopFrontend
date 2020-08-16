@@ -28,7 +28,7 @@ const Dashboard = () => {
       <Topbar username="test" onPressMenu={onPressMenu} />
       <div className=" flex-1 flex flex-row h-64">
         <SideMenu isMenuOpen={isMenuOpen} onCloseMenu={onCloseMenu} />
-        {tid ? <ProductList /> : <Index />}
+        {tid ? <ProductList tid={tid} /> : <Index />}
       </div>
     </div>
   );

@@ -7,7 +7,9 @@ const Index: React.FC<{}> = ({}) => {
       className=" flex-1"
       style={{
         backgroundImage: `url(${require("../images/dashboardBg.jpg")})`,
-        backgroundSize: "stretch",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}
     ></div>
   );

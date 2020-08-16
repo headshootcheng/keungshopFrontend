@@ -4,6 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const AccountPopUpMobile: React.FC<{
   mobileMoreAnchorEl: any;
@@ -47,6 +48,17 @@ const AccountPopUpMobile: React.FC<{
           <LockIcon />
         </IconButton>
         <p>Reset Password</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <ExitToAppIcon />
+        </IconButton>
+        <p>Logout</p>
       </MenuItem>
     </Menu>
   );

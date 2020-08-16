@@ -16,7 +16,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import LockIcon from "@material-ui/icons/Lock";
 import AccountPopUp from "./accountPopUp";
 import AccountPopUpMobile from "./accountPopUpMobile";
 const useStyles = makeStyles((theme: Theme) =>
@@ -93,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "none",
       [theme.breakpoints.up("md")]: {
         display: "flex",
-        marginLeft: 120,
+        marginLeft: 100,
       },
     },
   })
@@ -137,7 +136,7 @@ const Topbar: React.FC<{ username: string; onPressMenu: () => void }> = ({
   return (
     <div className={classes.wrapper}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className=" h-full">
           <IconButton
             edge="start"
             className={classes.menuButton}

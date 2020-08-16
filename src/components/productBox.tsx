@@ -5,7 +5,12 @@ import Button from "@material-ui/core/Button";
 import { useShoppingCart } from "use-shopping-cart";
 
 const ProductBox: React.FC<{ item: any }> = ({ item }) => {
-  const { addItem, removeItem, redirectToCheckout } = useShoppingCart();
+  const {
+    addItem,
+    removeItem,
+    redirectToCheckout,
+    checkoutSingleItem,
+  } = useShoppingCart();
 
   return (
     <div
@@ -36,7 +41,7 @@ const ProductBox: React.FC<{ item: any }> = ({ item }) => {
         variant="contained"
         color="secondary"
         style={{ marginTop: 10 }}
-        onClick={() => redirectToCheckout()}
+        onClick={() => checkoutSingleItem({ sku: item.sku })}
       >
         Pay
       </Button>

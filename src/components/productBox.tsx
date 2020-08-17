@@ -3,15 +3,10 @@ import React from "react";
 import "../styles/tailwind.css";
 import Button from "@material-ui/core/Button";
 import { useShoppingCart } from "use-shopping-cart";
-
+import { useHistory } from "react-router-dom";
 const ProductBox: React.FC<{ item: any }> = ({ item }) => {
-  const {
-    addItem,
-    removeItem,
-    redirectToCheckout,
-    checkoutSingleItem,
-  } = useShoppingCart();
-
+  const { addItem, removeItem, cartDetails } = useShoppingCart();
+  const history = useHistory();
   return (
     <div
       className=" border-black border-solid border-2 rounded-md w-64 flex  mx-4 my-4 py-2 flex-col items-center "
@@ -41,7 +36,7 @@ const ProductBox: React.FC<{ item: any }> = ({ item }) => {
         variant="contained"
         color="secondary"
         style={{ marginTop: 10 }}
-        onClick={() => checkoutSingleItem({ sku: item.sku })}
+        onClick={() => history.push("/payment", { productList: cartDetails })}
       >
         Pay
       </Button>

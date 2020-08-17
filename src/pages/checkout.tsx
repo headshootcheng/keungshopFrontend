@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+
 import "../styles/tailwind.css";
-import Button from "@material-ui/core/Button";
 
 const CheckoutForm: React.FC<{}> = ({}) => {
   const [succeeded, setSucceeded] = useState(false);
@@ -13,18 +14,21 @@ const CheckoutForm: React.FC<{}> = ({}) => {
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+  const { state } = useLocation();
+
   useEffect(() => {
     async function FetchData() {
       const { data } = await axios.post(
         "http://127.0.0.1:5000/create-payment-intent",
         {
-          items: [{ id: "xl-tshirt" }],
+          items: [state.productList["price_1HGnGWIEWLQJp0xoz1UirVZ1"] || {}],
         }
       );
+      console.log("check", state);
+
       console.log(data);
       setClientSecret(data.clientSecret);
     }
-
     FetchData();
   }, []);
 

@@ -3,25 +3,14 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
-import { loadStripe } from "@stripe/stripe-js";
-import { CartProvider } from "use-shopping-cart";
-const stripePromise = loadStripe(process.env.REACT_APP_STIPE_KEY || "");
+import Payment from "./pages/payment";
 console.log(process.env);
 ReactDOM.render(
   <Router>
     <div>
       <Switch>
-        <CartProvider
-          stripe={stripePromise}
-          successUrl="http://www.stripe.com"
-          cancelUrl="https://www.google.com"
-          currency="hkd"
-          allowedCountries={["HK"]}
-          billingAddressCollection={true}
-          mode="client-only"
-        >
-          <Route path="/dashboard" component={Dashboard} />
-        </CartProvider>
+        <Route path="/payment" component={Payment} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
   </Router>,

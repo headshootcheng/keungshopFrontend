@@ -4,6 +4,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Payment from "./pages/payment";
+import CardSave from "./pages/cardSave";
 console.log(process.env);
 ReactDOM.render(
   <Router>
@@ -11,6 +12,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/payment" component={Payment} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/cardsave" component={CardSave} />
       </Switch>
     </div>
   </Router>,

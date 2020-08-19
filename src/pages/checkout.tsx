@@ -21,11 +21,10 @@ const CheckoutForm: React.FC<{}> = ({}) => {
       const { data } = await axios.post(
         "http://127.0.0.1:5000/create-payment-intent",
         {
-          items: [state.productList["price_1HGnGWIEWLQJp0xoz1UirVZ1"] || {}],
+          items: [],
         }
       );
       console.log("check", state);
-
       console.log(data);
       setClientSecret(data.clientSecret);
     }
@@ -60,16 +59,36 @@ const CheckoutForm: React.FC<{}> = ({}) => {
   const handleSubmit = async (ev: any) => {
     ev.preventDefault();
     setProcessing(true);
-    //console.log(ev.target.name.value);
+
     if (stripe && elements) {
+      console.log(elements.getElement(CardElement));
       const payload = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement) || { token: "" },
           billing_details: {
-            name: ev.target.name.value,
+            name: "Peter Cheng",
           },
         },
       });
+      if (payload.error) {
+        setError(`Payment failed ${payload.error.message}`);
+        setProcessing(false);
+      } else {
+        setError("");
+        setProcessing(false);
+        setSucceeded(true);
+      }
+    }
+  };
+
+  const test = async () => {
+    if (stripe) {
+      const payload = await stripe.confirmCardPayment(
+        "pi_1HHVP0IEWLQJp0xoR0pVmRmU_secret_CPXDIlK58cPiIxsDB1RoyJkYj",
+        {
+          payment_method: "pm_1HHTE2IEWLQJp0xomC8M0F7B",
+        }
+      );
       if (payload.error) {
         setError(`Payment failed ${payload.error.message}`);
         setProcessing(false);
@@ -117,6 +136,7 @@ const CheckoutForm: React.FC<{}> = ({}) => {
         </a>{" "}
         Refresh the page to pay again.
       </p>{" "}
+      <button onClick={test}>test</button>
     </div>
   );
 };
